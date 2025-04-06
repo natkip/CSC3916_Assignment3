@@ -70,7 +70,7 @@ router.post('/signin', async (req, res) => { // Use async/await
 //POST: Creates a new movie
 router.post('/movies', authJwtController.isAuthenticated, async (req, res) => {
   const { title, releaseDate, genre, actors } = req.body;
-  if (!title || !releaseDate || !genre || !actors {
+  if (!title || !releaseDate || !genre || !actors) {
     return res.status(400).json({ success: false, msg: 'Missing movie information.' });
   }
   try {
