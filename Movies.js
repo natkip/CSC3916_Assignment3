@@ -14,9 +14,15 @@ const connectDB = async () => {
 connectDB();
 
 // Movie schema
+<<<<<<< HEAD
 const MovieSchema = new Schema({
   title: { type: String, required: true, index: true},
   releaseDate: {type: Number, min: [1900, 'Must be greater than 1899'], max: {2100, 'Must be less than 2100'}},
+=======
+var MovieSchema = new Schema({
+  title: { type: String, required: true, index: true },
+  releaseDate: { type: Number, min: [1900, 'Must be greater than 1899'], max: [2100, 'Must be less than 2100']},
+>>>>>>> origin/main
   genre: {
     type: String,
     enum: [
