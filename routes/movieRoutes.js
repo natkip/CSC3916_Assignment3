@@ -1,6 +1,6 @@
 const express = require('express');
 const { getMovies, getMovie, createMovie, updateMovie, deleteMovie } = require('../controllers/movieController');
-const authJwtController = require('/.auth_jwt');
+const authJwtController = require('../auth_jwt');
 const router = express.Router();
 
 router.route('/')
