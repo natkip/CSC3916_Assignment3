@@ -43,43 +43,8 @@ router.post('/signup', async (req, res) => { // Use async/await
   }
 });
 
+app.use('/api/movies', movieRoutes);
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log('Server running on port ${PORT}'));
 
-router.post('/signin', async (req, res) => { // Use async/await
-  try {
-    const user = await User.findOne({ username: req.body.username }).select('name username password');
-
-    if (!user) {
-      return res.status(401).json({ success: false, msg: 'Authentication failed. User not found.' }); // 401 Unauthorized
-    }
-
-    const isMatch = await user.comparePassword(req.body.password); // Use await
-
-    if (isMatch) {
-      const userToken = { id: user._id, username: user.username }; // Use user._id (standard Mongoose)
-      const token = jwt.sign(userToken, process.env.SECRET_KEY, { expiresIn: '1h' }); // Add expiry to the token (e.g., 1 hour)
-      res.json({ success: true, token: 'JWT ' + token });
-    } else {
-      res.status(401).json({ success: false, msg: 'Authentication failed. Incorrect password.' }); // 401 Unauthorized
-    }
-  } catch (err) {
-    console.error(err); // Log the error
-    res.status(500).json({ success: false, message: 'Something went wrong. Please try again later.' }); // 500 Internal Server Error
-  }
-});
-
-router.route('/movies')
-    .get(authJwtController.isAuthenticated, async (req, res) => {
-        return res.status(500).json({ success: false, message: 'GET request not supported' });
-    })
-    .post(authJwtController.isAuthenticated, async (req, res) => {
-        return res.status(500).json({ success: false, message: 'POST request not supported' });
-    });
-
-app.use('/', router);
-
-const PORT = process.env.PORT || 8080; // Define PORT before using it
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
-module.exports = app; // for testing only
+module.exports = app;
