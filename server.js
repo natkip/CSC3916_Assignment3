@@ -5,7 +5,7 @@ const authJwtController = require('./auth_jwt'); // You're not using authControl
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const User = require('./Users');
-const Movie = require('./Movies'); // You're not using Movie, consider removing it
+const movieRoutes = require('./routes/movieRoutes'); // You're not using Movie, consider removing it
 
 const app = express();
 app.use(cors());
